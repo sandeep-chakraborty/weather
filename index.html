@@ -64,34 +64,24 @@ h1, h2 {
   vertical-align: middle;
   margin-right: 10px;
 }
-@media (max-width: 600px) {
-        body {
-          padding: 10px;
-        }
-
-        .data {
-          padding: 15px;
-        }
-
+@media screen and (max-width: 768px) {
         .data input {
-          width: calc(100% - 30px);
-          padding: 8px;
-          font-size: 14px;
+          width: 90%;
         }
-
+      
+        .data {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+      
         .data button {
-          padding: 8px 16px;
-          font-size: 14px;
-        }
-
-        h1, h2 {
-          font-size: 18px;
-        }
-
-        .icon {
-          font-size: 18px;
+          width: 30%; 
+          margin-top: 10px;
+          align-self: flex-start; 
         }
       }
+    </style>
     </style>
   </head>
   <body>
