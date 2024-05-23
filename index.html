@@ -128,7 +128,7 @@ h1, h2 {
             tempMin.innerHTML = `<i class="ri-arrow-down-s-line icon"></i> Min Temp: ${res.main.temp_min} °C`;
             humidity.innerHTML = `<i class="ri-drop-line icon"></i> Humidity: ${res.main.humidity}%`;
             desc.innerHTML = `<i class="ri-sun-cloudy-line icon"></i> ${res.weather[0].description}`;
-          }).catch(err=>alert("error aya hai:"+err));
+          }).catch(err=>alert("please input a valid city name:)"));
       }
 
       document.body.addEventListener("keydown", function(event){
