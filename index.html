@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/2.5.0/remixicon.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+    body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #1f1f1f; /* Dark gray background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.data {
+  background: #2b2b2b; /* Dark gray content area */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  color: #f0f0f0; /* Light gray text color */
+}
+
+.data input {
+  width: calc(100% - 40px);
+  padding: 10px;
+  margin: 20px 0;
+  border: 1px solid #444;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #1f1f1f;
+  color: #f0f0f0;
+}
+
+.data button {
+  background-color: #4CAF50; /* Green button */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.data button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+h1, h2 {
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+.icon {
+  font-size: 20px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+    </style>
+  </head>
+  <body>
+    <div class="data">
+      <input type="text" placeholder="Enter your city name:" />
+      <button onclick="GetweatherDats()">
+        <i class="ri-search-line icon"></i> Get Data
+      </button>
+
+      <h1 id="cityName"></h1>
+      <h2 id="desc"></h2>
+      <h2 id="temp"></h2>
+      <h2 id="feelsLike"></h2>
+      <h2 id="tempMax"></h2>
+      <h2 id="tempMin"></h2>
+      <h2 id="humidity"></h2>
+    </div>
+
+    <script>
+      const weatherApi = {
+        key: "4eb3703790b356562054106543b748b2",
+        baseUrl: "https://api.openweathermap.org/data/2.5/weather",
+      };
+
+      function GetweatherDats() {
+        const city = document.querySelector("input").value.toLowerCase();
+        const cityName = document.getElementById("cityName");
+        const temp = document.getElementById("temp");
+        const feelsLike = document.getElementById("feelsLike");
+        const tempMax = document.getElementById("tempMax");
+        const tempMin = document.getElementById("tempMin");
+        const humidity = document.getElementById("humidity");
+        const desc = document.getElementById("desc");
+        
+        fetch(
+          `${weatherApi.baseUrl}?q=${city}&appid=${weatherApi.key}&units=metric`
+        )
+          .then((response) => response.json())
+          .then((res) => {
+            cityName.innerHTML = ` ${res.name}`;
+            temp.innerHTML = `<i class="ri-thermometer-line icon"></i> Temperature: ${res.main.temp} °C`;
+            feelsLike.innerHTML = `<i class="ri-user-heart-line icon"></i> Feels Like: ${res.main.feels_like} °C`;
+            tempMax.innerHTML = `<i class="ri-arrow-up-s-line icon"></i> Max Temp: ${res.main.temp_max} °C`;
+            tempMin.innerHTML = `<i class="ri-arrow-down-s-line icon"></i> Min Temp: ${res.main.temp_min} °C`;
+            humidity.innerHTML = `<i class="ri-drop-line icon"></i> Humidity: ${res.main.humidity}%`;
+            desc.innerHTML = `<i class="ri-sun-cloudy-line icon"></i> ${res.weather[0].description}`;
+          }).catch(err=>alert("error aya hai:"+err));
+      }
+
+      document.body.addEventListener("keydown", function(event){
+  if (event.key === "Enter") {
+    GetweatherDats()
+  }
+});
+    </script>
+  </body>
+</html>
